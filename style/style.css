@@ -1,0 +1,193 @@
+/* GANZE SEITE */
+
+body {
+    margin: 10px;
+    font-family: Arial, sans-serif;
+}
+
+
+/* OBERER BEREICH */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+/* LOGO */
+
+.logo {
+    .logo img {
+    width: 120px;
+    height: auto;
+}
+}
+
+
+/* WALLET */
+
+.wallet {
+    width: 300px;
+    padding: 12px;
+
+    text-align: center;
+
+    border: 1px solid #999;
+}
+
+
+/* KONTO + SETTINGS */
+
+.account {
+    display: flex;
+    gap: 20px;
+}
+
+.account button {
+    padding: 12px 18px;
+
+    background-color: #444;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+}
+
+
+/* HAUPTBEREICH */
+
+main {
+    display: flex;
+    gap: 30px;
+}
+
+
+/* SPIELAUSWAHL LINKS */
+
+.games {
+    width: 130px;
+
+    border: 1px solid #999;
+
+    padding: 20px 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+
+.games button {
+    padding: 10px;
+
+    background-color: white;
+
+    border: 1px solid #999;
+
+    cursor: pointer;
+}
+
+
+/* GROSSER SPIELBEREICH */
+
+.game-area {
+    flex: 1;
+
+    border: 1px solid #999;
+
+    padding: 80px;
+}
+
+
+/* GEWINN / VERLUST */
+
+.profit {
+    width: 175px;
+
+    margin: 0 auto 20px auto;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border: 1px solid #999;
+}
+
+
+/* MITTLERER BEREICH */
+
+.game-content {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 70px;
+}
+
+
+/* GLÜCKSRAD */
+
+.wheel {
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background-color: #444;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* WETTEINSATZ */
+
+.bet-area {
+    text-align: center;
+}
+
+.bet-area button {
+    padding: 12px 18px;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+
+/* LETZTER GEWINN */
+
+.last-win {
+    margin-top: 40px;
+
+    padding: 35px 20px;
+
+    border: 1px solid #999;
+}
+
+
+/* PLAY BUTTON */
+
+.play-button {
+    width: 90%;
+
+    display: block;
+
+    margin: 15px auto 5px auto;
+
+    padding: 20px;
+
+    background-color: #444;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
