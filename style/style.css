@@ -29,7 +29,7 @@ header {
 /* LOGO */
 
 .logo img {
-    width: 70px;
+    width: 60px;
     height: auto;
 }
 
@@ -148,6 +148,7 @@ main {
     height: 450px;
 
     border-radius: 50%;
+    margin-left: 175px;
 
     background-color: #444;
     color: white;
