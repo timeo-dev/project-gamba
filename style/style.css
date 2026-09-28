@@ -1,0 +1,205 @@
+/* GANZE WEBSEITE */
+body {
+    margin: 0;
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* GANZE SEITE */
+body {
+    margin: 10px;
+    font-family: Arial, sans-serif;
+}
+
+
+/* OBERER BEREICH */
+
+header {
+    background-color: #1c1c1c;
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+/* LOGO */
+
+.logo img {
+    width: 60px;
+    height: auto;
+}
+
+
+/* WALLET */
+
+.wallet {
+    width: 300px;
+    padding: 12px;
+
+    text-align: center;
+
+    border: 1px solid #999;
+}
+
+
+/* KONTO + SETTINGS */
+
+.account {
+    display: flex;
+    gap: 20px;
+}
+
+.account button {
+    padding: 12px 18px;
+
+    background-color: #444;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+}
+
+
+/* HAUPTBEREICH */
+
+main {
+    display: flex;
+    gap: 30px;
+}
+
+
+/* SPIELAUSWAHL LINKS */
+
+.games {
+    background-color: #1c1c1c;
+    padding: 20px;
+
+    width: 130px;
+
+    border: 1px solid #999;
+
+    padding: 20px 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+
+.games button {
+    background-color: #011b3e;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    padding: 12px 20px;
+
+    cursor: pointer;
+}
+
+
+/* GROSSER SPIELBEREICH */
+
+.game-area {
+    background-color: #1c1c1c;
+    border: 1px solid #444;
+    padding: 20px;
+
+    flex: 1;
+}
+
+
+/* GEWINN / VERLUST */
+
+.profit {
+    width: 175px;
+
+    margin: 0 auto 20px auto;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border: 1px solid #999;
+}
+
+
+/* MITTLERER BEREICH */
+
+.game-content {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 70px;
+}
+
+
+/* GLÜCKSRAD */
+
+.wheel {
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+    margin-left: 175px;
+
+    background-color: #444;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* WETTEINSATZ */
+
+.bet-area {
+    text-align: center;
+}
+
+.bet-area button {
+    padding: 12px 18px;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+
+/* LETZTER GEWINN */
+
+.last-win {
+    margin-top: 40px;
+
+    padding: 35px 20px;
+
+    border: 1px solid #999;
+}
+
+
+/* PLAY BUTTON */
+
+.play-button {
+    background-color: #011b3e;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 20px;
+    cursor: pointer;
+
+    width: 90%;
+
+    display: block;
+
+    margin: 15px auto 5px auto;
+}
