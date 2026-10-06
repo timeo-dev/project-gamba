@@ -7,41 +7,193 @@
 
     <title>GAMBA</title>
 
-    <!-- CSS verbinden -->
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         OBERER BEREICH
-    ========================== -->
+    <!-- ========================================
+         KONTO ERSTELLEN
+    ========================================= -->
+    <div id="registerScreen" class="overlay hidden">
+
+        <div class="popup">
+
+            <h1>Willkommen bei GAMBA</h1>
+
+            <p>Erstelle dein Spielkonto</p>
+
+            <label for="usernameInput">
+                Benutzername
+            </label>
+
+            <input
+                type="text"
+                id="usernameInput"
+                maxlength="20"
+                placeholder="Benutzername">
+
+            <p id="registerError" class="error"></p>
+
+            <button id="createAccountButton">
+                Konto erstellen
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         SETTINGS
+    ========================================= -->
+    <div id="settingsScreen" class="overlay hidden">
+
+        <div class="popup">
+
+            <h2>Settings</h2>
+
+
+            <!-- ANIMATION -->
+            <div class="setting">
+
+                <label for="animationSetting">
+                    Glücksrad-Animation
+                </label>
+
+                <input
+                    type="checkbox"
+                    id="animationSetting"
+                    checked>
+
+            </div>
+
+
+            <!-- DARK MODE -->
+            <div class="setting">
+
+                <label for="darkSetting">
+                    Dark Mode
+                </label>
+
+                <input
+                    type="checkbox"
+                    id="darkSetting"
+                    checked>
+
+            </div>
+
+
+            <button id="saveSettingsButton">
+                Speichern
+            </button>
+
+            <button
+                id="closeSettingsButton"
+                class="secondary-button">
+
+                Abbrechen
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         KONTO ANZEIGEN
+    ========================================= -->
+    <div id="accountScreen" class="overlay hidden">
+
+        <div class="popup">
+
+            <h2>Mein Konto</h2>
+
+            <p>
+                Benutzername:
+                <strong id="accountUsername">
+                    ---
+                </strong>
+            </p>
+
+            <p>
+                Guthaben:
+
+                <strong>
+
+                    <span id="accountWallet">
+                        0
+                    </span>
+
+                    Coins
+
+                </strong>
+            </p>
+
+            <button id="closeAccountButton">
+                Schliessen
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
     <header>
 
         <!-- LOGO -->
         <div class="logo">
-            <img src="../images/logo.png" alt="GAMBA Logo">
+
+            <img
+                src="../images/logo.png"
+                alt="GAMBA Logo">
+
         </div>
+
 
         <!-- WALLET -->
         <div class="wallet">
+
             Wallet:
-            <span id="wallet">1000</span> Coins
+
+            <span id="wallet">
+                0
+            </span>
+
+            Coins
+
         </div>
 
-        <!-- KONTO UND SETTINGS -->
+
+        <!-- HEADER BUTTONS -->
         <div class="account">
-            <button id="accountButton">Konto</button>
-            <button id="settingsButton">Settings</button>
+
+            <button id="bonusButton">
+                Tagesbonus
+            </button>
+
+            <button id="accountButton">
+                Konto
+            </button>
+
+            <button id="settingsButton">
+                Settings
+            </button>
+
         </div>
 
     </header>
 
 
-    <!-- =========================
+    <!-- ========================================
          HAUPTBEREICH
-    ========================== -->
+    ========================================= -->
     <main>
+
 
         <!-- SPIELAUSWAHL LINKS -->
         <nav class="games">
@@ -57,10 +209,11 @@
         </nav>
 
 
-        <!-- =========================
+        <!-- ========================================
              SPIELBEREICH
-        ========================== -->
+        ========================================= -->
         <section class="game-area">
+
 
             <!-- GEWINN / VERLUST -->
             <div class="profit">
@@ -69,28 +222,70 @@
 
                 <br>
 
-                <span id="profit">0</span> Coins
+                <span id="profit">
+                    0
+                </span>
+
+                Coins
 
             </div>
 
 
-            <!-- =========================
+            <!-- ========================================
                  GLÜCKSRAD
-            ========================== -->
+            ========================================= -->
             <div id="wheelGame">
 
                 <div class="game-content">
 
 
-                    <!-- GLÜCKSRAD -->
+                    <!-- RAD -->
                     <div class="wheel-container">
 
+                        <!-- PFEIL -->
                         <div class="pointer">
                             ▼
                         </div>
 
-                        <div class="wheel" id="wheel">
 
+                        <div
+                            class="wheel"
+                            id="wheel">
+
+
+                            <!--
+                                3 POSITIVE FELDER
+                                3 NEGATIVE FELDER
+
+                                = 50 / 50
+                            -->
+
+                            <span class="wheel-label label1">
+                                +2x
+                            </span>
+
+                            <span class="wheel-label label2">
+                                -1x
+                            </span>
+
+                            <span class="wheel-label label3">
+                                +1x
+                            </span>
+
+                            <span class="wheel-label label4">
+                                -2x
+                            </span>
+
+                            <span class="wheel-label label5">
+                                +0.5x
+                            </span>
+
+                            <span class="wheel-label label6">
+                                -0.5x
+                            </span>
+
+
+                            <!-- MITTE -->
                             <div class="wheel-center">
                                 GAMBA
                             </div>
@@ -100,17 +295,28 @@
                     </div>
 
 
-                    <!-- WETTBEREICH -->
+                    <!-- ========================================
+                         WETTBEREICH
+                    ========================================= -->
                     <div class="bet-area">
 
-                        <p>Wettbetrag</p>
+                        <p>
+                            Wettbetrag
+                        </p>
+
 
                         <h2>
-                            <span id="bet">10</span> Coins
+
+                            <span id="bet">
+                                10
+                            </span>
+
+                            Coins
+
                         </h2>
 
 
-                        <!-- PLUS UND MINUS -->
+                        <!-- PLUS / MINUS -->
                         <div class="bet-buttons">
 
                             <button id="minusButton">
@@ -124,10 +330,10 @@
                         </div>
 
 
-                        <!-- LETZTER GEWINN -->
+                        <!-- LETZTES ERGEBNIS -->
                         <div class="last-win">
 
-                            Letzter Gewinn
+                            Letztes Ergebnis
 
                             <br><br>
 
@@ -156,14 +362,19 @@
             </div>
 
 
-            <!-- =========================
+            <!-- ========================================
                  WÜRFELSPIEL
-            ========================== -->
-            <div id="diceGame" class="hidden">
+            ========================================= -->
+            <div
+                id="diceGame"
+                class="hidden">
 
                 <div class="dice-content">
 
-                    <h2>Würfelspiel</h2>
+                    <h2>
+                        Würfelspiel
+                    </h2>
+
 
                     <div
                         class="dice"
@@ -173,11 +384,13 @@
 
                     </div>
 
+
                     <p>
-                        1–3 = verloren
+                        1–3 = Einsatz verloren
                         <br>
-                        4–6 = gewonnen
+                        4–6 = Einsatz gewonnen
                     </p>
+
 
                     <button
                         class="play-button"
@@ -196,9 +409,9 @@
     </main>
 
 
-    <!-- =========================
-         JAVASCRIPT VERBINDEN
-    ========================== -->
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
 
     <script src="../script/script.js"></script>
 

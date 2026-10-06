@@ -1,13 +1,30 @@
 // ==========================================
-// GAMBA JAVASCRIPT
+// GAMBA
+// Spielsimulation mit virtuellen Coins
 // ==========================================
 
 
 // ==========================================
-// STARTWERTE
+// GRUNDEINSTELLUNGEN
 // ==========================================
 
-let wallet = 1000;
+const START_COINS = 1000;
+
+const DAILY_BONUS = 100;
+
+
+// 24 Stunden in Millisekunden
+const BONUS_TIME =
+    24 * 60 * 60 * 1000;
+
+
+// ==========================================
+// SPIELVARIABLEN
+// ==========================================
+
+let username = "";
+
+let wallet = START_COINS;
 
 let bet = 10;
 
@@ -17,7 +34,46 @@ let gameRunning = false;
 
 
 // ==========================================
-// HTML ELEMENTE HOLEN
+// SETTINGS
+// ==========================================
+
+let settings = {
+
+    animation: true,
+
+    darkMode: true
+
+};
+
+
+// ==========================================
+// GLÜCKSRAD MULTIPLIKATOREN
+//
+// 3 POSITIV
+// 3 NEGATIV
+//
+// = 50 / 50
+// ==========================================
+
+const wheelMultipliers = [
+
+    2,
+
+    -1,
+
+    1,
+
+    -2,
+
+    0.5,
+
+    -0.5
+
+];
+
+
+// ==========================================
+// HTML ELEMENTE
 // ==========================================
 
 const walletText =
@@ -33,6 +89,10 @@ const lastWinText =
     document.getElementById("lastWin");
 
 
+const wheel =
+    document.getElementById("wheel");
+
+
 const plusButton =
     document.getElementById("plusButton");
 
@@ -41,10 +101,6 @@ const minusButton =
 
 const playButton =
     document.getElementById("playButton");
-
-
-const wheel =
-    document.getElementById("wheel");
 
 
 // SPIELAUSWAHL
@@ -67,78 +123,313 @@ const diceGame =
 
 // WÜRFEL
 
-const diceButton =
-    document.getElementById("diceButton");
-
 const dice =
     document.getElementById("dice");
 
+const diceButton =
+    document.getElementById("diceButton");
 
-// KONTO / SETTINGS
+
+// ==========================================
+// KONTO ELEMENTE
+// ==========================================
+
+const registerScreen =
+    document.getElementById("registerScreen");
+
+const usernameInput =
+    document.getElementById("usernameInput");
+
+const createAccountButton =
+    document.getElementById("createAccountButton");
+
+const registerError =
+    document.getElementById("registerError");
+
 
 const accountButton =
     document.getElementById("accountButton");
 
-const settingsButton =
-    document.getElementById("settingsButton");
+const accountScreen =
+    document.getElementById("accountScreen");
 
+const accountUsername =
+    document.getElementById("accountUsername");
+
+const accountWallet =
+    document.getElementById("accountWallet");
+
+const closeAccountButton =
+    document.getElementById("closeAccountButton");
 
 
 // ==========================================
-// FUNKTION
+// SETTINGS ELEMENTE
+// ==========================================
+
+const settingsButton =
+    document.getElementById("settingsButton");
+
+const settingsScreen =
+    document.getElementById("settingsScreen");
+
+const animationSetting =
+    document.getElementById("animationSetting");
+
+const darkSetting =
+    document.getElementById("darkSetting");
+
+const saveSettingsButton =
+    document.getElementById("saveSettingsButton");
+
+const closeSettingsButton =
+    document.getElementById("closeSettingsButton");
+
+
+// ==========================================
+// BONUS
+// ==========================================
+
+const bonusButton =
+    document.getElementById("bonusButton");
+
+
+// ==========================================
+// WEBSEITE STARTEN
+// ==========================================
+
+function startWebsite() {
+
+    loadAccount();
+
+    loadSettings();
+
+    updateDisplay();
+
+    updateBonusButton();
+
+}
+
+
+// ==========================================
+// KONTO LADEN
+// ==========================================
+
+function loadAccount() {
+
+    const savedUsername =
+        localStorage.getItem(
+            "gambaUsername"
+        );
+
+
+    const savedWallet =
+        localStorage.getItem(
+            "gambaWallet"
+        );
+
+
+    // Noch kein Konto vorhanden
+
+    if (savedUsername === null) {
+
+        registerScreen.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    username = savedUsername;
+
+
+    if (savedWallet !== null) {
+
+        wallet =
+            Number(savedWallet);
+
+    }
+
+}
+
+
+// ==========================================
+// KONTO ERSTELLEN
+// ==========================================
+
+function createAccount() {
+
+    const newUsername =
+        usernameInput.value.trim();
+
+
+    // Mindestens 3 Zeichen
+
+    if (newUsername.length < 3) {
+
+        registerError.textContent =
+            "Der Benutzername muss mindestens 3 Zeichen haben.";
+
+        return;
+
+    }
+
+
+    username =
+        newUsername;
+
+
+    wallet =
+        START_COINS;
+
+
+    // Benutzername speichern
+
+    localStorage.setItem(
+        "gambaUsername",
+        username
+    );
+
+
+    // Wallet speichern
+
+    saveWallet();
+
+
+    // Fenster schliessen
+
+    registerScreen.classList.add(
+        "hidden"
+    );
+
+
+    registerError.textContent = "";
+
+
+    updateDisplay();
+
+}
+
+
+// ==========================================
+// KONTO ANZEIGEN
+// ==========================================
+
+function showAccount() {
+
+    accountUsername.textContent =
+        username;
+
+
+    accountWallet.textContent =
+        wallet;
+
+
+    accountScreen.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+// ==========================================
+// KONTO SCHLIESSEN
+// ==========================================
+
+function closeAccount() {
+
+    accountScreen.classList.add(
+        "hidden"
+    );
+
+}
+
+
+// ==========================================
+// WALLET SPEICHERN
+// ==========================================
+
+function saveWallet() {
+
+    localStorage.setItem(
+        "gambaWallet",
+        wallet
+    );
+
+}
+
+
+// ==========================================
 // ANZEIGE AKTUALISIEREN
 // ==========================================
 
 function updateDisplay() {
 
-    walletText.textContent = wallet;
+    walletText.textContent =
+        wallet;
 
-    betText.textContent = bet;
+
+    betText.textContent =
+        bet;
+
+
+    accountWallet.textContent =
+        wallet;
 
 }
 
 
-
 // ==========================================
-// FUNKTION
 // GEWINN / VERLUST ANZEIGEN
 // ==========================================
 
-function showProfit(profit) {
+function showProfit(value) {
 
-    if (profit > 0) {
+    if (value > 0) {
 
         profitText.textContent =
-            "+" + profit;
+            "+" + value;
+
+
+        lastWinText.textContent =
+            "+" + value;
 
     }
 
     else {
 
         profitText.textContent =
-            profit;
+            value;
+
+
+        lastWinText.textContent =
+            value;
 
     }
 
 }
 
 
-
 // ==========================================
-// FUNKTION
 // EINSATZ ERHÖHEN
 // ==========================================
 
 function increaseBet() {
 
     if (gameRunning === true) {
+
         return;
+
     }
 
 
     if (bet + 10 <= wallet) {
 
-        bet = bet + 10;
+        bet =
+            bet + 10;
+
 
         updateDisplay();
 
@@ -147,22 +438,24 @@ function increaseBet() {
 }
 
 
-
 // ==========================================
-// FUNKTION
 // EINSATZ VERRINGERN
 // ==========================================
 
 function decreaseBet() {
 
     if (gameRunning === true) {
+
         return;
+
     }
 
 
     if (bet > 10) {
 
-        bet = bet - 10;
+        bet =
+            bet - 10;
+
 
         updateDisplay();
 
@@ -171,26 +464,28 @@ function decreaseBet() {
 }
 
 
-
 // ==========================================
-// FUNKTION
-// GLÜCKSRAD SPIELEN
+// GLÜCKSRAD STARTEN
 // ==========================================
 
 function playWheel() {
 
-    // Spiel läuft bereits
+    // Rad läuft bereits
 
     if (gameRunning === true) {
+
         return;
+
     }
 
 
-    // Nicht genügend Coins
+    // Genug Coins?
 
     if (wallet < bet) {
 
-        alert("Du hast nicht genügend Coins!");
+        alert(
+            "Du hast nicht genügend Coins."
+        );
 
         return;
 
@@ -202,197 +497,289 @@ function playWheel() {
     playButton.disabled = true;
 
 
-    // Einsatz abziehen
+    // ======================================
+    // ZUFÄLLIGES FELD
+    // ======================================
 
-    wallet = wallet - bet;
-
-    updateDisplay();
-
-
-    // Zufälliges Feld 0 - 5
-
-    let randomField =
-        Math.floor(Math.random() * 6);
+    const randomField =
+        Math.floor(
+            Math.random() *
+            wheelMultipliers.length
+        );
 
 
-    // Multiplikatoren
+    // Multiplikator holen
 
-    let multipliers =
-        [0, 1, 2, 0, 1, 3];
-
-
-    let multiplier =
-        multipliers[randomField];
+    const multiplier =
+        wheelMultipliers[randomField];
 
 
-    // Gewinn berechnen
+    // ======================================
+    // EINSATZ MULTIPLIZIEREN
+    // ======================================
 
-    let win =
+    const result =
         bet * multiplier;
 
 
-    // Rad drehen
+    // Beispiel:
+    //
+    // Einsatz = 50
+    //
+    // +2x = +100
+    // -1x = -50
+    // +0.5x = +25
+
+
+    // ======================================
+    // RAD DREHEN
+    // ======================================
+
+    const fullSpins =
+        1080;
+
+
+    const fieldRotation =
+        randomField * 60;
+
 
     rotation =
-        rotation + 720 + randomField * 60;
+        rotation +
+        fullSpins +
+        fieldRotation;
 
 
-    wheel.style.transform =
-        "rotate(" + rotation + "deg)";
+    // ======================================
+    // ANIMATION AN
+    // ======================================
+
+    if (settings.animation === true) {
+
+        wheel.style.transition =
+            "transform 3s cubic-bezier(0.15, 0.65, 0.15, 1)";
 
 
-    // 2 Sekunden warten
-    // bis das Rad fertig gedreht hat
-
-    setTimeout(function () {
-
-        // Gewinn zur Wallet hinzufügen
-
-        wallet = wallet + win;
+        wheel.style.transform =
+            "rotate(" +
+            rotation +
+            "deg)";
 
 
-        // Gewinn / Verlust berechnen
+        setTimeout(
 
-        let profit =
-            win - bet;
+            function () {
 
+                finishWheel(
+                    result
+                );
 
-        // Letzten Gewinn anzeigen
+            },
 
-        lastWinText.textContent =
-            win;
+            3000
 
+        );
 
-        // Gewinn / Verlust anzeigen
-
-        showProfit(profit);
-
-
-        // Anzeigen aktualisieren
-
-        updateDisplay();
+    }
 
 
-        // Spiel wieder freigeben
+    // ======================================
+    // ANIMATION AUS
+    // ======================================
 
-        gameRunning = false;
+    else {
 
-        playButton.disabled = false;
+        wheel.style.transition =
+            "none";
 
 
-    }, 2000);
+        wheel.style.transform =
+            "rotate(" +
+            rotation +
+            "deg)";
+
+
+        finishWheel(
+            result
+        );
+
+    }
 
 }
 
 
+// ==========================================
+// GLÜCKSRAD BEENDEN
+// ==========================================
+
+function finishWheel(result) {
+
+    // Ergebnis zur Wallet rechnen
+
+    wallet =
+        wallet + result;
+
+
+    // Wallet darf nicht unter 0
+
+    if (wallet < 0) {
+
+        wallet = 0;
+
+    }
+
+
+    // Ergebnis anzeigen
+
+    showProfit(
+        result
+    );
+
+
+    // Wallet speichern
+
+    saveWallet();
+
+
+    // Anzeige aktualisieren
+
+    updateDisplay();
+
+
+    // Rad wieder freigeben
+
+    gameRunning = false;
+
+    playButton.disabled = false;
+
+}
+
 
 // ==========================================
-// FUNKTION
 // GLÜCKSRAD ANZEIGEN
 // ==========================================
 
 function showWheelGame() {
 
-    wheelGame.classList.remove("hidden");
+    wheelGame.classList.remove(
+        "hidden"
+    );
 
-    diceGame.classList.add("hidden");
+
+    diceGame.classList.add(
+        "hidden"
+    );
 
 }
 
 
-
 // ==========================================
-// FUNKTION
 // WÜRFELSPIEL ANZEIGEN
 // ==========================================
 
 function showDiceGame() {
 
-    wheelGame.classList.add("hidden");
+    wheelGame.classList.add(
+        "hidden"
+    );
 
-    diceGame.classList.remove("hidden");
+
+    diceGame.classList.remove(
+        "hidden"
+    );
 
 }
 
 
-
 // ==========================================
-// FUNKTION
-// WÜRFELN
+// WÜRFELSPIEL
 // ==========================================
 
 function rollDice() {
 
-    // Prüfen ob genug Coins vorhanden sind
-
     if (wallet < bet) {
 
-        alert("Du hast nicht genügend Coins!");
+        alert(
+            "Du hast nicht genügend Coins."
+        );
 
         return;
 
     }
 
 
-    // Zufallszahl 1 - 6
+    // Zahl 1 - 6
 
-    let number =
-        Math.floor(Math.random() * 6) + 1;
+    const number =
+        Math.floor(
+            Math.random() * 6
+        ) + 1;
 
 
     // Würfelsymbole
 
-    let diceSymbols = [
+    const symbols = [
+
         "⚀",
+
         "⚁",
+
         "⚂",
+
         "⚃",
+
         "⚄",
+
         "⚅"
+
     ];
 
 
-    // Würfel anzeigen
-
     dice.textContent =
-        diceSymbols[number - 1];
+        symbols[number - 1];
 
 
-    // Einsatz abziehen
-
-    wallet = wallet - bet;
+    let result;
 
 
-    let win = 0;
+    // 1 - 3 = verlieren
 
+    if (number <= 3) {
 
-    // 4, 5 oder 6 = Gewinn
-
-    if (number >= 4) {
-
-        win = bet * 2;
+        result =
+            -bet;
 
     }
 
 
-    // Gewinn hinzufügen
+    // 4 - 6 = gewinnen
 
-    wallet = wallet + win;
+    else {
 
+        result =
+            bet;
 
-    // Gewinn / Verlust
-
-    let profit =
-        win - bet;
-
-
-    // Letzten Gewinn anzeigen
-
-    lastWinText.textContent =
-        win;
+    }
 
 
-    showProfit(profit);
+    wallet =
+        wallet + result;
+
+
+    // Nicht negativ
+
+    if (wallet < 0) {
+
+        wallet = 0;
+
+    }
+
+
+    showProfit(
+        result
+    );
+
+
+    saveWallet();
 
 
     updateDisplay();
@@ -400,43 +787,329 @@ function rollDice() {
 }
 
 
-
 // ==========================================
-// FUNKTION
-// KONTO
+// TAGESBONUS
 // ==========================================
 
-function showAccount() {
+function claimDailyBonus() {
+
+    const lastBonus =
+        localStorage.getItem(
+            "gambaLastBonus"
+        );
+
+
+    const now =
+        Date.now();
+
+
+    // Noch nie abgeholt
+
+    if (lastBonus === null) {
+
+        giveBonus(
+            now
+        );
+
+        return;
+
+    }
+
+
+    const timePassed =
+        now -
+        Number(lastBonus);
+
+
+    // 24 Stunden vergangen
+
+    if (timePassed >= BONUS_TIME) {
+
+        giveBonus(
+            now
+        );
+
+    }
+
+
+    // Noch nicht bereit
+
+    else {
+
+        const remaining =
+            BONUS_TIME -
+            timePassed;
+
+
+        const hours =
+            Math.floor(
+                remaining /
+                3600000
+            );
+
+
+        const minutes =
+            Math.floor(
+                (remaining % 3600000) /
+                60000
+            );
+
+
+        alert(
+            "Dein nächster Bonus ist in " +
+            hours +
+            "h " +
+            minutes +
+            "min verfügbar."
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// BONUS GEBEN
+// ==========================================
+
+function giveBonus(time) {
+
+    wallet =
+        wallet +
+        DAILY_BONUS;
+
+
+    // Zeitpunkt speichern
+
+    localStorage.setItem(
+        "gambaLastBonus",
+        time
+    );
+
+
+    saveWallet();
+
+
+    updateDisplay();
+
+
+    updateBonusButton();
+
 
     alert(
-        "GAMBA Konto\n\n" +
-        "Aktuelles Guthaben: " +
-        wallet +
-        " Coins"
+        "Tagesbonus erhalten: +100 Coins!"
     );
 
 }
 
 
+// ==========================================
+// BONUS BUTTON AKTUALISIEREN
+// ==========================================
+
+function updateBonusButton() {
+
+    const lastBonus =
+        localStorage.getItem(
+            "gambaLastBonus"
+        );
+
+
+    // Noch nie abgeholt
+
+    if (lastBonus === null) {
+
+        bonusButton.textContent =
+            "100 Coins abholen";
+
+        return;
+
+    }
+
+
+    const timePassed =
+        Date.now() -
+        Number(lastBonus);
+
+
+    // Bonus bereit
+
+    if (timePassed >= BONUS_TIME) {
+
+        bonusButton.textContent =
+            "100 Coins abholen";
+
+    }
+
+
+    // Noch nicht bereit
+
+    else {
+
+        bonusButton.textContent =
+            "Tagesbonus";
+
+    }
+
+}
+
 
 // ==========================================
-// FUNKTION
-// SETTINGS
+// SETTINGS LADEN
+// ==========================================
+
+function loadSettings() {
+
+    const savedSettings =
+        localStorage.getItem(
+            "gambaSettings"
+        );
+
+
+    if (savedSettings !== null) {
+
+        settings =
+            JSON.parse(
+                savedSettings
+            );
+
+    }
+
+
+    applySettings();
+
+}
+
+
+// ==========================================
+// SETTINGS ÖFFNEN
 // ==========================================
 
 function showSettings() {
 
-    alert(
-        "Die Einstellungen werden später hinzugefügt."
+    animationSetting.checked =
+        settings.animation;
+
+
+    darkSetting.checked =
+        settings.darkMode;
+
+
+    settingsScreen.classList.remove(
+        "hidden"
     );
 
 }
 
+
+// ==========================================
+// SETTINGS SPEICHERN
+// ==========================================
+
+function saveSettings() {
+
+    settings.animation =
+        animationSetting.checked;
+
+
+    settings.darkMode =
+        darkSetting.checked;
+
+
+    localStorage.setItem(
+
+        "gambaSettings",
+
+        JSON.stringify(
+            settings
+        )
+
+    );
+
+
+    applySettings();
+
+
+    settingsScreen.classList.add(
+        "hidden"
+    );
+
+}
+
+
+// ==========================================
+// SETTINGS ANWENDEN
+// ==========================================
+
+function applySettings() {
+
+    // DARK MODE
+
+    if (settings.darkMode === true) {
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+    }
+
+
+    // LIGHT MODE
+
+    else {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// SETTINGS SCHLIESSEN
+// ==========================================
+
+function closeSettings() {
+
+    settingsScreen.classList.add(
+        "hidden"
+    );
+
+}
 
 
 // ==========================================
 // BUTTONS MIT FUNKTIONEN VERBINDEN
 // ==========================================
+
+
+// KONTO ERSTELLEN
+
+createAccountButton.addEventListener(
+    "click",
+    createAccount
+);
+
+
+// ENTER BEI BENUTZERNAME
+
+usernameInput.addEventListener(
+
+    "keydown",
+
+    function (event) {
+
+        if (event.key === "Enter") {
+
+            createAccount();
+
+        }
+
+    }
+
+);
 
 
 // PLUS
@@ -455,7 +1128,7 @@ minusButton.addEventListener(
 );
 
 
-// PLAY
+// GLÜCKSRAD STARTEN
 
 playButton.addEventListener(
     "click",
@@ -487,7 +1160,7 @@ diceButton.addEventListener(
 );
 
 
-// KONTO
+// KONTO ÖFFNEN
 
 accountButton.addEventListener(
     "click",
@@ -495,7 +1168,15 @@ accountButton.addEventListener(
 );
 
 
-// SETTINGS
+// KONTO SCHLIESSEN
+
+closeAccountButton.addEventListener(
+    "click",
+    closeAccount
+);
+
+
+// SETTINGS ÖFFNEN
 
 settingsButton.addEventListener(
     "click",
@@ -503,9 +1184,32 @@ settingsButton.addEventListener(
 );
 
 
+// SETTINGS SPEICHERN
+
+saveSettingsButton.addEventListener(
+    "click",
+    saveSettings
+);
+
+
+// SETTINGS ABBRECHEN
+
+closeSettingsButton.addEventListener(
+    "click",
+    closeSettings
+);
+
+
+// TAGESBONUS
+
+bonusButton.addEventListener(
+    "click",
+    claimDailyBonus
+);
+
 
 // ==========================================
-// WEBSEITE STARTEN
+// GAMBA STARTEN
 // ==========================================
 
-updateDisplay();
+startWebsite();
