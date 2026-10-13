@@ -236,6 +236,11 @@ main {
 }
 
 
+#wheelProfit {
+    margin-bottom: 55px;
+}
+
+
 #profit {
     font-size: 22px;
 
@@ -257,6 +262,15 @@ main {
     gap: 100px;
 
     min-height: 470px;
+}
+
+
+.wheel-column {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
 }
 
 
@@ -301,15 +315,15 @@ main {
 
     background: conic-gradient(
 
-        #075985 0deg 60deg,
+        #003376 0deg 60deg,
 
         #7f1d1d 60deg 120deg,
 
-        #075985 120deg 180deg,
+        #003376 120deg 180deg,
 
         #7f1d1d 180deg 240deg,
 
-        #075985 240deg 300deg,
+        #003376 240deg 300deg,
 
         #7f1d1d 300deg 360deg
     );
@@ -317,8 +331,6 @@ main {
     transition:
         transform 3s
         cubic-bezier(0.15, 0.65, 0.15, 1);
-
-    box-shadow: 0 0 25px black;
 }
 
 
@@ -344,6 +356,8 @@ main {
     background-color: #121212;
 
     border: 4px solid white;
+
+    color: white;
 
     display: flex;
 
@@ -376,6 +390,8 @@ main {
 
     text-align: center;
 
+    color: white;
+
     font-size: 20px;
 
     font-weight: bold;
@@ -383,52 +399,28 @@ main {
 
 
 .label1 {
-    transform:
-        rotate(30deg)
-        translateY(-155px)
-        rotate(-30deg);
+    transform: rotate(30deg) translateY(-155px);
 }
-
 
 .label2 {
-    transform:
-        rotate(90deg)
-        translateY(-155px)
-        rotate(-90deg);
+    transform: rotate(90deg) translateY(-155px);
 }
-
 
 .label3 {
-    transform:
-        rotate(150deg)
-        translateY(-155px)
-        rotate(-150deg);
+    transform: rotate(150deg) translateY(-155px);
 }
-
 
 .label4 {
-    transform:
-        rotate(210deg)
-        translateY(-155px)
-        rotate(-210deg);
+    transform: rotate(210deg) translateY(-155px);
 }
-
 
 .label5 {
-    transform:
-        rotate(270deg)
-        translateY(-155px)
-        rotate(-270deg);
+    transform: rotate(270deg) translateY(-155px);
 }
-
 
 .label6 {
-    transform:
-        rotate(330deg)
-        translateY(-155px)
-        rotate(-330deg);
+    transform: rotate(330deg) translateY(-155px);
 }
-
 
 /* ========================================
    WETTBEREICH
@@ -663,7 +655,7 @@ main {
 
     padding: 15px 0;
 
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #4444;
 }
 
 
@@ -684,7 +676,6 @@ main {
     min-height: 20px;
 }
 
-
 /* ========================================
    VERSTECKEN
 ======================================== */
@@ -692,7 +683,6 @@ main {
 .hidden {
     display: none;
 }
-
 
 /* ========================================
    KLEINERE BILDSCHIRME
@@ -706,13 +696,11 @@ main {
         gap: 15px;
     }
 
-
     .game-content {
         flex-direction: column;
 
         gap: 50px;
     }
-
 
     .wheel {
         width: 320px;

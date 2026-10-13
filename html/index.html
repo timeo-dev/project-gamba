@@ -147,17 +147,8 @@
 
         <!-- LOGO -->
         <div class="logo">
-<<<<<<< HEAD
-
-            <img
-                src="../images/logo.png"
-                alt="GAMBA Logo">
-
-=======
             <img src="../images/Logo GAMBA.png" alt="GAMBA Logo">
->>>>>>> 9c76da1f0b555da0e28af0620883e6388248c872
         </div>
-
 
         <!-- WALLET -->
         <div class="wallet">
@@ -220,14 +211,14 @@
 
 
             <!-- GEWINN / VERLUST -->
-            <div class="profit">
+            <div class="profit hidden" id="diceProfit">
 
                 Aktueller Gewinn/Verlust
 
                 <br>
 
-                <span id="profit">
-                    0
+                <span class="profit-value">
+                    
                 </span>
 
                 Coins
@@ -244,54 +235,73 @@
 
 
                     <!-- RAD -->
-                    <div class="wheel-container">
+                    <div class="wheel-column">
 
-                        <!-- PFEIL -->
-                        <div class="pointer">
-                            ▼
+                        <div class="profit" id="wheelProfit">
+
+                            Aktueller Gewinn/Verlust
+
+                            <br>
+
+                            <span class="profit-value">
+                                
+                            </span>
+
+                            Coins
+
                         </div>
 
 
-                        <div
-                            class="wheel"
-                            id="wheel">
+                        <div class="wheel-container">
+
+                            <!-- PFEIL -->
+                            <div class="pointer">
+                                ▼
+                            </div>
 
 
-                            <!--
-                                3 POSITIVE FELDER
-                                3 NEGATIVE FELDER
-
-                                = 50 / 50
-                            -->
-
-                            <span class="wheel-label label1">
-                                +2x
-                            </span>
-
-                            <span class="wheel-label label2">
-                                -1x
-                            </span>
-
-                            <span class="wheel-label label3">
-                                +1x
-                            </span>
-
-                            <span class="wheel-label label4">
-                                -2x
-                            </span>
-
-                            <span class="wheel-label label5">
-                                +0.5x
-                            </span>
-
-                            <span class="wheel-label label6">
-                                -0.5x
-                            </span>
+                            <div
+                                class="wheel"
+                                id="wheel">
 
 
-                            <!-- MITTE -->
-                            <div class="wheel-center">
-                                GAMBA
+                                <!--
+                                    3 POSITIVE FELDER
+                                    3 NEGATIVE FELDER
+
+                                    = 50 / 50
+                                -->
+
+                                <span class="wheel-label label1">
+                                    +2x
+                                </span>
+
+                                <span class="wheel-label label2">
+                                    -1x
+                                </span>
+
+                                <span class="wheel-label label3">
+                                    +1x
+                                </span>
+
+                                <span class="wheel-label label4">
+                                    -2x
+                                </span>
+
+                                <span class="wheel-label label5">
+                                    +0.5x
+                                </span>
+
+                                <span class="wheel-label label6">
+                                    -0.5x
+                                </span>
+
+
+                                <!-- MITTE -->
+                                <div class="wheel-center">
+                                    GAMBA
+                                </div>
+
                             </div>
 
                         </div>
