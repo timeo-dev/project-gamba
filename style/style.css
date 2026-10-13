@@ -236,6 +236,11 @@ main {
 }
 
 
+#wheelProfit {
+    margin-bottom: 55px;
+}
+
+
 #profit {
     font-size: 22px;
 
@@ -257,6 +262,15 @@ main {
     gap: 100px;
 
     min-height: 470px;
+}
+
+
+.wheel-column {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
 }
 
 
@@ -343,6 +357,8 @@ main {
 
     border: 4px solid white;
 
+    color: white;
+
     display: flex;
 
     justify-content: center;
@@ -373,6 +389,8 @@ main {
     margin-top: -12px;
 
     text-align: center;
+
+    color: white;
 
     font-size: 20px;
 

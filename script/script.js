@@ -8,7 +8,7 @@
 
 const START_COINS = 1000;
 const DAILY_BONUS = 100;
-const BONUS_TIME = 24 * 60 * 60 * 1000;
+const BONUS_TIME = 8 * 60 * 60 * 1000;
 
 // SPIELVARIABLEN
 
@@ -18,7 +18,7 @@ let bet = 10;
 let rotation = 0;
 let gameRunning = false;
 
-// NEU: Gesamter Gewinn/Verlust der Sitzung
+// Gesamter Gewinn/Verlust der Sitzung
 let totalProfit = 0;
 
 // SETTINGS
@@ -46,7 +46,7 @@ const wheelMultipliers = [
 
 const walletText = document.getElementById("wallet");
 const betText = document.getElementById("bet");
-const profitText = document.getElementById("profit");
+const profitTexts = document.querySelectorAll(".profit-value");
 const lastWinText = document.getElementById("lastWin");
 
 const wheel = document.getElementById("wheel");
@@ -60,6 +60,8 @@ const diceGameButton = document.getElementById("diceGameButton");
 
 const wheelGame = document.getElementById("wheelGame");
 const diceGame = document.getElementById("diceGame");
+const diceProfit = document.getElementById("diceProfit");
+const wheelProfit = document.getElementById("wheelProfit");
 
 const dice = document.getElementById("dice");
 const diceButton = document.getElementById("diceButton");
@@ -102,7 +104,9 @@ function startWebsite() {
 
     // Gesamtergebnis beginnt bei 0
     totalProfit = 0;
-    profitText.textContent = "0";
+    profitTexts.forEach(function (profitText) {
+        profitText.textContent = "0";
+    });
 }
 
 // ==========================================
@@ -197,11 +201,16 @@ function showProfit(value) {
     totalProfit += value;
 
     // Gesamter Gewinn/Verlust
+    let profitDisplay;
     if (totalProfit > 0) {
-        profitText.textContent = "+" + totalProfit;
+        profitDisplay = "+" + totalProfit;
     } else {
-        profitText.textContent = totalProfit;
+        profitDisplay = totalProfit;
     }
+
+    profitTexts.forEach(function (profitText) {
+        profitText.textContent = profitDisplay;
+    });
 
     // Nur das Ergebnis der letzten Runde
     if (value > 0) {
@@ -272,19 +281,19 @@ function playWheel() {
     const result = bet * multiplier;
 
     // ======================================
-    // KORRIGIERTE GLÜCKSRAD-DREHUNG
+    // GLÜCKSRAD-DREHUNG
     // ======================================
 
     const fieldAngle = 360 / wheelMultipliers.length;
 
-    // Mitte des ausgewählten Feldes
+    // Mitte des zufälligen Feldes
     const targetAngle =
         (360 - (randomField + 0.5) * fieldAngle + 360) % 360;
 
     // Aktuelle Position
     const currentAngle = ((rotation % 360) + 360) % 360;
 
-    // Korrektur zur Zielposition
+    // Zielposition
     const correction =
         (targetAngle - currentAngle + 360) % 360;
 
@@ -339,7 +348,7 @@ function finishWheel(result) {
     // Tatsächliche Veränderung berücksichtigen
     const actualResult = wallet - oldWallet;
 
-    // NEU: Gesamtergebnis aktualisieren
+    // Gesamtergebnis aktualisieren
     showProfit(actualResult);
 
     saveWallet();
@@ -357,11 +366,15 @@ function finishWheel(result) {
 function showWheelGame() {
     wheelGame.classList.remove("hidden");
     diceGame.classList.add("hidden");
+    diceProfit.classList.add("hidden");
+    wheelProfit.classList.remove("hidden");
 }
 
 function showDiceGame() {
     diceGame.classList.remove("hidden");
     wheelGame.classList.add("hidden");
+    diceProfit.classList.remove("hidden");
+    wheelProfit.classList.add("hidden");
 }
 
 // ==========================================
