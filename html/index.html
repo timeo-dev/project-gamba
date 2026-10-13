@@ -211,13 +211,13 @@
 
 
             <!-- GEWINN / VERLUST -->
-            <div class="profit hidden" id="diceProfit">
+            <div class="profit">
 
                 Aktueller Gewinn/Verlust
 
                 <br>
 
-                <span class="profit-value">
+                <span id="profit">
                     
                 </span>
 
@@ -235,73 +235,54 @@
 
 
                     <!-- RAD -->
-                    <div class="wheel-column">
+                    <div class="wheel-container">
 
-                        <div class="profit" id="wheelProfit">
-
-                            Aktueller Gewinn/Verlust
-
-                            <br>
-
-                            <span class="profit-value">
-                                
-                            </span>
-
-                            Coins
-
+                        <!-- PFEIL -->
+                        <div class="pointer">
+                            ▼
                         </div>
 
 
-                        <div class="wheel-container">
-
-                            <!-- PFEIL -->
-                            <div class="pointer">
-                                ▼
-                            </div>
+                        <div
+                            class="wheel"
+                            id="wheel">
 
 
-                            <div
-                                class="wheel"
-                                id="wheel">
+                            <!--
+                                3 POSITIVE FELDER
+                                3 NEGATIVE FELDER
+
+                                = 50 / 50
+                            -->
+
+                            <span class="wheel-label label1">
+                                +2x
+                            </span>
+
+                            <span class="wheel-label label2">
+                                -1x
+                            </span>
+
+                            <span class="wheel-label label3">
+                                +1x
+                            </span>
+
+                            <span class="wheel-label label4">
+                                -2x
+                            </span>
+
+                            <span class="wheel-label label5">
+                                +0.5x
+                            </span>
+
+                            <span class="wheel-label label6">
+                                -0.5x
+                            </span>
 
 
-                                <!--
-                                    3 POSITIVE FELDER
-                                    3 NEGATIVE FELDER
-
-                                    = 50 / 50
-                                -->
-
-                                <span class="wheel-label label1">
-                                    +2x
-                                </span>
-
-                                <span class="wheel-label label2">
-                                    -1x
-                                </span>
-
-                                <span class="wheel-label label3">
-                                    +1x
-                                </span>
-
-                                <span class="wheel-label label4">
-                                    -2x
-                                </span>
-
-                                <span class="wheel-label label5">
-                                    +0.5x
-                                </span>
-
-                                <span class="wheel-label label6">
-                                    -0.5x
-                                </span>
-
-
-                                <!-- MITTE -->
-                                <div class="wheel-center">
-                                    GAMBA
-                                </div>
-
+                            <!-- MITTE -->
+                            <div class="wheel-center">
+                                GAMBA
                             </div>
 
                         </div>
